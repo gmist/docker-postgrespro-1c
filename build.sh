@@ -1,3 +1,3 @@
 #!/bin/sh
 
-docker build -t gmist/postgrespro-1c .
+docker build --tag gmist/postgrespro-1c:vscale4Gb .
