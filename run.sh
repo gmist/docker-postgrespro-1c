@@ -1,7 +1,7 @@
 #!/bin/sh
 
 docker run --name postgrespro-1c \
-  --net host \
+  -p 5432:5432 \
   --detach \
   --volume postgrespro-1c-data:/data \
   --volume /etc/localtime:/etc/localtime:ro \
