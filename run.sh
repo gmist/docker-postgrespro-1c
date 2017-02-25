@@ -6,4 +6,5 @@ docker run --name postgrespro-1c \
   -v postgrespro-1c-data:/data \
   -v /etc/localtime:/etc/localtime:ro \
   -e POSTGRES_PASSWORD=password \
+  --restart always \
   alexanderfefelov/postgrespro-1c
