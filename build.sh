@@ -1,3 +1,3 @@
 #!/bin/sh
 
-docker build --tag alexanderfefelov/postgrespro-1c .
+docker build --tag gmist/postgrespro-1c .
