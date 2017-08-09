@@ -7,4 +7,4 @@ docker run --name postgrespro-1c \
   -v /etc/localtime:/etc/localtime:ro \
   -e POSTGRES_PASSWORD=password \
   --restart always \
-  gmist/postgrespro-1c
+  gmist/postgrespro-1c:6Gb
