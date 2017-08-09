@@ -1,3 +1,3 @@
 #!/bin/sh
 
-docker build --tag gmist/postgrespro-1c .
+docker build -t gmist/postgrespro-1c .
