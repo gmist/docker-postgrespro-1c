@@ -1,13 +1,13 @@
 FROM ubuntu:xenial
 
-ENV SERVER_VERSION 9.4
+ENV SERVER_VERSION 9.6
 
 ENV DEBIAN_FRONTEND noninteractive
 
 RUN groupadd postgres --gid=999 \
   && useradd --gid postgres --uid=999 postgres
 
-ENV GOSU_VERSION 1.7
+ENV GOSU_VERSION 1.10
 RUN apt-get -qq update \
   && apt-get -qq install --yes --no-install-recommends ca-certificates wget locales && rm -rf /var/lib/apt/lists/* \
   && apt-get clean \
@@ -16,7 +16,8 @@ RUN apt-get -qq update \
   && chmod +x /usr/local/bin/gosu \
   && gosu nobody true
 
-RUN localedef --inputfile ru_RU --force --charmap UTF-8 --alias-file /usr/share/locale/locale.alias ru_RU.UTF-8
+RUN locale-gen en_US.UTF-8 \
+  && localedef --inputfile ru_RU --force --charmap UTF-8 --alias-file /usr/share/locale/locale.alias ru_RU.UTF-8
 ENV LANG ru_RU.utf8
 
 ENV PATH /usr/lib/postgresql/$SERVER_VERSION/bin:$PATH
@@ -27,6 +28,7 @@ RUN echo deb http://1c.postgrespro.ru/deb/ xenial main > /etc/apt/sources.list.d
   && apt-get -qq install --yes --no-install-recommends postgresql-common-pro-1c \
   && sed -ri 's/#(create_main_cluster) .*$/\1 = false/' /etc/postgresql-common/createcluster.conf \
   && apt-get -qq install --yes --no-install-recommends postgresql-pro-1c-$SERVER_VERSION \
+  && apt-get purge -y --auto-remove ca-certificates wget \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
 
